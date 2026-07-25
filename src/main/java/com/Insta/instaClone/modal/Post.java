@@ -1,10 +1,69 @@
+//package com.Insta.instaClone.modal;
+//
+//import com.Insta.instaClone.dto.UserDto;
+//import jakarta.persistence.*;
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.Getter;
+//import lombok.Setter;
+//import org.hibernate.annotations.Comments;
+//
+//import java.time.LocalDateTime;
+//import java.util.ArrayList;
+//import java.util.HashSet;
+//import java.util.List;
+//import java.util.Set;
+//
+//@Getter
+//@Setter
+//@Data
+//@AllArgsConstructor
+//@Entity
+//@Table(name = "post")
+//public class Post {
+//
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Integer id;
+//    private String caption;
+//
+//    private String image;
+//    private String location;
+//    private LocalDateTime createdAt;
+//
+//
+//    @Embedded
+//    @AttributeOverride(name = "id", column = @Column(name = "user_id"))
+//    @AttributeOverride(name = "email", column = @Column(name = "user_email"))
+////    @AttributeOverride(name = "username", column = @Column(name = "user_name"))
+//
+//    private UserDto user;
+//
+//    @OneToMany
+//  private List<Comments> comments = new ArrayList<>();
+//
+//
+//
+//    @Embedded
+//    @ElementCollection
+//    @JoinTable(name = "LikedByUsers" , joinColumns = @JoinColumn(name = "user_id"))
+//    private Set<UserDto> LikedByUsers = new HashSet<UserDto>();
+//
+//
+//
+//}
+
+
+
 package com.Insta.instaClone.modal;
 
 import com.Insta.instaClone.dto.UserDto;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Comments;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,111 +73,36 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Data
+@AllArgsConstructor
 @Entity
 @Table(name = "post")
 public class Post {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String caption;
 
+    private String caption;
     private String image;
     private String location;
     private LocalDateTime createdAt;
 
-
     @Embedded
     @AttributeOverride(name = "id", column = @Column(name = "user_id"))
     @AttributeOverride(name = "email", column = @Column(name = "user_email"))
-//    @AttributeOverride(name = "username", column = @Column(name = "user_name"))
-
     private UserDto user;
 
-    @OneToMany
-  private List<Comments> comments = new ArrayList<>();
-
-
+    // ✅ Fix: Import your own Comments class, not org.hibernate.annotations.Comments
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comments> comments = new ArrayList<>();  // Note: should be Comments (capital C)
 
     @Embedded
     @ElementCollection
-    @JoinTable(name = "LikedByUsers" , joinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "LikedByUsers", joinColumns = @JoinColumn(name = "user_id"))
     private Set<UserDto> LikedByUsers = new HashSet<UserDto>();
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCaption() {
-        return caption;
-    }
-
-    public void setCaption(String caption) {
-        this.caption = caption;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public UserDto getUser() {
-        return user;
-    }
-
-    public void setUser(UserDto user) {
-        this.user = user;
-    }
-
-    public List<Comments> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comments> comments) {
-        this.comments = comments;
-    }
-
-    public Set<UserDto> getLikedByUsers() {
-        return LikedByUsers;
-    }
-
-    public void setLikedByUsers(Set<UserDto> likedByUsers) {
-        LikedByUsers = likedByUsers;
-    }
-
-    public Post(Integer id, String caption, String image, String location, LocalDateTime createdAt, UserDto user, List<Comments> comments, Set<UserDto> likedByUsers) {
-        this.id = id;
-        this.caption = caption;
-        this.image = image;
-        this.location = location;
-        this.createdAt = createdAt;
-        this.user = user;
-        this.comments = comments;
-        LikedByUsers = likedByUsers;
+    // Add a no-args constructor
+    public Post() {
     }
 }
