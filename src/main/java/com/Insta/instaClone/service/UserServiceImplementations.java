@@ -2,12 +2,16 @@ package com.Insta.instaClone.service;
 
 import com.Insta.instaClone.exception.UserException;
 import com.Insta.instaClone.modal.User;
+import com.Insta.instaClone.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class UserServiceImplementations implements UserService {
 
 
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public User registerUser(User user) throws UserException {
