@@ -12,7 +12,9 @@ public class UserDto {
     private String userImage;
 
 
+public UserDto(){
 
+}
 
 
     // we make constrcutor

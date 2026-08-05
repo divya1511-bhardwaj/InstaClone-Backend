@@ -48,7 +48,10 @@ public class User {
     private List<Post> savedPost = new ArrayList<>();
 
 
+//    empty constructor
+public User(){
 
+}
 
 
 
