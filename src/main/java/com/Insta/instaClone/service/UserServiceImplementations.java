@@ -62,7 +62,11 @@ public class UserServiceImplementations implements UserService {
 
     @Override
     public User findUserByUsername(String username) throws UserException {
-        return null;
+       Optional<User> opt=userRepository.findByUsername(username);
+       if(opt.isPresent()){
+           return opt.get();
+       }
+       throw new UserException("user not exist with username :"+username);
     }
 
     @Override
@@ -150,8 +154,29 @@ public class UserServiceImplementations implements UserService {
         if(updatedUser.getEmail()!=null){
             existingUser.setEmail(updatedUser.getEmail());
         }
+        if(updatedUser.getBio()!=null){
+            existingUser.setBio(updatedUser.getBio());
+        }
+        if(updatedUser.getName()!=null){
+            existingUser.setName(updatedUser.getName());
+        }
+        if(updatedUser.getUsername()!=null){
+            existingUser.setUsername(updatedUser.getUsername());
+        }
+        if(updatedUser.getMobile()!=null){
+            existingUser.setMobile(updatedUser.getMobile());
+        }
+        if(updatedUser.getGender()!=null){
+            existingUser.setGender(updatedUser.getGender());
+        }
+        if(updatedUser.getImage()!=null){
+            existingUser.setImage(updatedUser.getImage());
+        }
+        if(updatedUser.getId().equals(existingUser.getId())){
+            return userRepository.save(existingUser);
+        }
 
-        return null;
+        throw new UserException("you cant update this user");
     }
 }
 
