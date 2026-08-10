@@ -5,10 +5,13 @@ import com.Insta.instaClone.exception.UserException;
 import com.Insta.instaClone.modal.User;
 import com.Insta.instaClone.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
+@Service
 public class UserServiceImplementations implements UserService {
 
 

@@ -2,9 +2,11 @@ package com.Insta.instaClone.service;
 
 import com.Insta.instaClone.exception.UserException;
 import com.Insta.instaClone.modal.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface UserService {
 
     public User registerUser(User user) throws UserException;

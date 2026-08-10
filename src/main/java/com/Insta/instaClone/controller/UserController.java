@@ -34,23 +34,44 @@ public class UserController {
 
     }
 
-//    @PutMapping("follow/{followUserId}")
-//    public MessageResponse followUserHandler(@PathVariable Integer followUserId) {
-//        return null;
-//    }
+    @PutMapping("follow/{followUserId}")
+    public MessageResponse followUserHandler(@PathVariable Integer followUserId) {
+        return null;
+    }
+
+    @PutMapping("/unfollow/{userId}")
+    public MessageResponse unFollowUserHandler(@PathVariable Integer userId) {
+        return null;
+    }
 
     @PutMapping("/req")
     public  MessageResponse findUserProfileHandler(@RequestHeader("Authorization") String token){
+
        return null;
     }
 
 
-//    @GetMapping("m/{userIds}")
-//    public User findByUserIdsHandler(@PathVariable List<Integer>){
-//       List<Users> users=userService.findUserByIds(userIds);
-//       return
-//    }
+    @GetMapping("m/{userIds}")
+    public ResponseEntity<List<User>> findByUserIdsHandler(@PathVariable List<Integer> userIds) throws UserException{
+       List<User> users=userService.findUserByIds(userIds);
+       return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+    }
 
+
+    // api/users/search?q
+   @GetMapping("/search")
+    public ResponseEntity<List<User>> searchUserHandler(@RequestParam("q") String query)throws UserException {
+       List<User> users=userService.searchUser(query);
+       return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<User> updateUserHandler(@RequestHeader("Authorization") String token, @RequestBody User user){
+
+
+//      User updatedUser=userService.updateUserDetails(user,user);
+       return null;
+    }
 
 
 }
