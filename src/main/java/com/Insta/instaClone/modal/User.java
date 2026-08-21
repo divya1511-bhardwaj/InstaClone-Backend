@@ -3,18 +3,15 @@ package com.Insta.instaClone.modal;
 
 import com.Insta.instaClone.dto.UserDto;
 import jakarta.persistence.*;
-import jdk.jfr.DataAmount;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.engine.internal.Cascade;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 @Data
-@AllArgsConstructor
 @Entity
+
 @Table(name = "users")
 public class User {
 

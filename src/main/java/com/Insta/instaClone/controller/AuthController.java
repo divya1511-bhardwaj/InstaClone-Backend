@@ -4,11 +4,18 @@ package com.Insta.instaClone.controller;
 import com.Insta.instaClone.exception.UserException;
 import com.Insta.instaClone.modal.User;
 import com.Insta.instaClone.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 public class AuthController {
@@ -17,12 +24,22 @@ public class AuthController {
     private UserService userService;
 
 
+    @PostMapping("/signup")
+    public ResponseEntity<User> registeUserHandler(@RequestBody User user) throws UserException {
 
-    public ResponseEntity<User> registeUserHandler(@RequestBody User user) throws UserException{
-
-        User createdUser =userService.registerUser(user);
-        return  new ResponseEntity<User>(createdUser, HttpStatus.OK);
+        User createdUser = userService.registerUser(user);
+        return new ResponseEntity<User>(createdUser, HttpStatus.OK);
     }
 
-
+//    @GetMapping("/signin")
+//    public ResponseEntity<User> signinHandler(Authentication auth) throws BadCredentialsException
+//
+//        Optional<User> opt = userRepo.findByEmail(auth.getName());
+//
+//    if(opt.ispresent()){
+//        return new ResponseEntity<User>(opt.get(),HttpStatus.ACCEPTED);
+//    }
+//    throw new BadCredentialsException("invalid username or password");
+//
+//}
 }

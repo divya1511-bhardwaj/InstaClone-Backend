@@ -139,7 +139,7 @@ public class UserServiceImplementations implements UserService {
     public List<User> findUserByIds(List<Integer> userIds) throws UserException {
 
         List<User> users=userRepository.findAllUsersByUserIds(userIds);
-        return null;
+        return users;
     }
 
     @Override
