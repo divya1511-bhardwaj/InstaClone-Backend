@@ -3,6 +3,7 @@ package com.Insta.instaClone.controller;
 
 import com.Insta.instaClone.exception.UserException;
 import com.Insta.instaClone.modal.User;
+import com.Insta.instaClone.repository.UserRepository;
 import com.Insta.instaClone.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepo;
+
 
     @PostMapping("/signup")
     public ResponseEntity<User> registeUserHandler(@RequestBody User user) throws UserException {
@@ -31,15 +35,16 @@ public class AuthController {
         return new ResponseEntity<User>(createdUser, HttpStatus.OK);
     }
 
-//    @GetMapping("/signin")
-//    public ResponseEntity<User> signinHandler(Authentication auth) throws BadCredentialsException
-//
-//        Optional<User> opt = userRepo.findByEmail(auth.getName());
-//
-//    if(opt.ispresent()){
-//        return new ResponseEntity<User>(opt.get(),HttpStatus.ACCEPTED);
-//    }
-//    throw new BadCredentialsException("invalid username or password");
-//
-//}
+    @GetMapping("/signin")
+    public ResponseEntity<User> signinHandler(Authentication auth) throws BadCredentialsException{
+
+
+        Optional<User> opt = userRepo.findByEmail(auth.getName());
+
+    if(opt.isPresent()){
+        return new ResponseEntity<User>(opt.get(),HttpStatus.ACCEPTED);
+    }
+    throw new BadCredentialsException("invalid username or password");
+
+}
 }
