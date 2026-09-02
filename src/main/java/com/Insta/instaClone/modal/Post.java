@@ -95,7 +95,7 @@ public class Post {
 
     // ✅ Fix: Import your own Comments class, not org.hibernate.annotations.Comments
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Comments> comments = new ArrayList<>();  // Note: should be Comments (capital C)
+    private List<Comment> comments = new ArrayList<>();  // Note: should be Comments (capital C)
 
     @Embedded
     @ElementCollection

@@ -30,6 +30,10 @@ public class JwtTokenValidationFilter extends OncePerRequestFilter {
         String jwt = request.getHeader(SecurityContext.HEADER);
 
         if (jwt != null) {
+            // 🔴 strip "Bearer " prefix if present
+            if (jwt.startsWith("Bearer ")) {
+                jwt = jwt.substring(7);
+            }
 
             try {
                 SecretKey key = Keys.hmacShaKeyFor(SecurityContext.JWT_KEY.getBytes());

@@ -67,7 +67,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor  // ✅ Add this
 @Data
-public class Comments {  // ✅ Capital C
+public class Comment {  // ✅ Capital C
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
